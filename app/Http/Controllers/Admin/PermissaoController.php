@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\Controller;
+use App\Models\Admin\Permissao;
 use Illuminate\Http\Request;
 
 class PermissaoController extends Controller
@@ -11,9 +13,10 @@ class PermissaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($nome)
+    public function index()
     {
-        return view('permissao',compact('nome'));
+        $permissoes = Permissao::orderBy('id')->get();
+        return view('admin.permissao.index', compact('permissoes'));
     }
 
     /**
@@ -21,9 +24,9 @@ class PermissaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function criar()
     {
-        //
+        return view('admin.permissao.criar');
     }
 
     /**
@@ -32,7 +35,7 @@ class PermissaoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function salvar(Request $request)
     {
         //
     }
@@ -43,7 +46,7 @@ class PermissaoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function mostrar($id)
     {
         //
     }
@@ -54,7 +57,7 @@ class PermissaoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function editar($id)
     {
         //
     }
@@ -66,7 +69,7 @@ class PermissaoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function atualizar(Request $request, $id)
     {
         //
     }
@@ -77,7 +80,7 @@ class PermissaoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function excluir($id)
     {
         //
     }
