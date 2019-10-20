@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CriarTabelaPermissaoRole extends Migration
+class CriarTabelaMenuRole extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CriarTabelaPermissaoRole extends Migration
      */
     public function up()
     {
-        Schema::create('permissao_role', function (Blueprint $table) {
+        Schema::create('menu_role', function (Blueprint $table) {
             $table->unsignedBigInteger('role_id');
-            $table->foreign('role_id','fk_permissaorole_role')->references('id')->on('role')->onDelete('restrict')->onUpdate('restrict');
-            $table->unsignedBigInteger('permissao_id');
-            $table->foreign('permissao_id','fk_permissaorole_permissao')->references('id')->on('permissao')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreign('role_id','fk_menurole_role')->references('id')->on('role')->onDelete('restrict')->onUpdate('restrict');
+            $table->unsignedBigInteger('menu_id');
+            $table->foreign('menu_id','fk_menurole_menu')->references('id')->on('menu')->onDelete('restrict')->onUpdate('restrict');
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
         });
@@ -30,6 +30,6 @@ class CriarTabelaPermissaoRole extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permissao_role');
+        Schema::dropIfExists('menu_role');
     }
 }
