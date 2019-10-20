@@ -16,7 +16,10 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $menus = Menu::orderBy('id')->get();
+        // $menus = Menu::orderBy('id')->get();
+        // return view('admin.menu.index', compact('menus'));
+        $menus = Menu::getMenu();
+        // dd($menus);
         return view('admin.menu.index', compact('menus'));
     }
 
@@ -85,5 +88,16 @@ class MenuController extends Controller
     public function excluir($id)
     {
         //
+    }
+
+    public function salvarOrdem(Request $request)
+    {
+        if ($request->ajax()) {
+            $menu = new Menu;
+            $menu->salvarOrdem($request->menu);
+            return response()->json(['respuesta' => 'ok']);
+        } else {
+            abort(404);
+        }
     }
 }
