@@ -63,6 +63,11 @@
         <!-- AdminLTE for demo purposes -->
         <script src="{{asset("assets/$theme/dist/js/demo.js")}}"></script>
 
+        <script src="{{asset("assets/js/jquery-validation/jquery.validate.min.js")}}"></script>
+        <script src="{{asset("assets/js/jquery-validation/localization/messages_pt_BR.min.js")}}"></script>
+        <script src="{{asset("assets/js/funcoes.js")}}"></script>
+
+
         @yield("scripts")
     </body>
 </html>

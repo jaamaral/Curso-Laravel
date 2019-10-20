@@ -3,6 +3,10 @@
     Sistema Menus
 @endsection
 
+@section('scripts')
+    <script src="{{asset("assets/pages/scripts/admin/menu/criar.js")}}" type="text/javascript"></script>
+@endsection
+
 @section('conteudo')
     <div class="row">
         <div class="col-lg-12">
