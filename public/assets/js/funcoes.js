@@ -37,5 +37,24 @@ var Biblioteca = function () {
                 }
             });
         },
+        
+        notificacoes: function (mensagem, titulo, tipo) {
+            toastr.options = {
+                closeButton: true,
+                newestOnTop: true,
+                positionClass: 'toast-top-right',
+                preventDuplicates: true,
+                timeOut: '5000'
+            };
+            if (tipo == 'error') {
+                toastr.error(mensagem, titulo);
+            } else if (tipo == 'success') {
+                toastr.success(mensagem, titulo);
+            } else if (tipo == 'info') {
+                toastr.info(mensagem, titulo);
+            } else if (tipo == 'warning') {
+                toastr.warning(mensagem, titulo);
+            }
+        },
     }
 }(); 
