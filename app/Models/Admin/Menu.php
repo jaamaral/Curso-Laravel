@@ -10,6 +10,11 @@ class Menu extends Model
     protected $fillable = ['nome', 'url', 'icone'];
     protected $guarded = ['id'];
 
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class,'menu_role');
+    }
+
     public function getFilhos($pais, $line)
     {
         $children = [];

@@ -19,7 +19,6 @@ class MenuController extends Controller
         // $menus = Menu::orderBy('id')->get();
         // return view('admin.menu.index', compact('menus'));
         $menus = Menu::getMenu();
-        // dd($menus);
         return view('admin.menu.index', compact('menus'));
     }
 
