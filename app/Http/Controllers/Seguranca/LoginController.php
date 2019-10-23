@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class LoginController extends Controller
 {
     use AuthenticatesUsers;
-    protected $redirectTo = '/admin';
+    protected $redirectTo = '/';
 
     public function __construct()
     {
@@ -19,6 +19,18 @@ class LoginController extends Controller
     public function index()
     {
         return view('seguranca.index');
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        $roles = $user->roles()->where('estado',1)->get();
+        if ($roles->isNotEmpty()){
+            $user->setSession($roles->toArray());
+        } else{
+            $this->guard()->logout();
+            $request->session()->invalidate();
+            return redirect('seguranca/login')->withErrors(['error' => 'Este usuário não tem um perfil ativo']);
+        }
     }
 
     public function username()
