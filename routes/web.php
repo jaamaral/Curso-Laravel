@@ -43,4 +43,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     /*ROTAS DE MENU ROLE*/
     Route::get('menu-role', 'MenuRoleController@index')->name('menu_role');
     Route::post('menu-role', 'MenuRoleController@salvar')->name('salvar_menu_role');
+    /*ROTAS PERMISSAO_ROLE*/
+    Route::get('permissao-role', 'PermissaoRoleController@index')->name('permissao_role');
+    Route::post('permissao-role', 'PermissaoRoleController@salvar')->name('salvar_permissao_role');
 });
+Route::get('livro', 'LivroController@index')->name('livro');
+Route::get('livro/criar', 'LivroController@criar')->name('criar_livro');
+Route::post('livro', 'LivroController@salvar')->name('salvar_livro');
+Route::get('livro/{id}/editar', 'LivroController@editar')->name('editar_livro');
+Route::put('livro/{id}', 'LivroController@atualizar')->name('atualizar_livro');
+Route::delete('livro/{id}', 'LivroController@excluir')->name('excluir_livro');

@@ -1,10 +1,10 @@
 @extends("theme.$theme.layout")
 @section('titulo')
-Perfis
+Livros
 @endsection
 
 @section("scripts")
-<script src="{{asset("assets/pages/scripts/admin/index.js")}}" type="text/javascript"></script>
+<script src="{{asset("assets/pages/scripts/livro/index.js")}}" type="text/javascript"></script>
 @endsection
 
 @section('conteudo')
@@ -13,10 +13,10 @@ Perfis
         @include('includes.mensagem')
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Perfis</h3>
+                <h3 class="box-title">Livros</h3>
                 <div class="box-tools pull-right">
-                    <a href="{{route('criar_role')}}" class="btn btn-block btn-success btn-sm">
-                        <i class="fa fa-fw fa-plus-circle"></i> Incluir Registro
+                    <a href="{{route('criar_livro')}}" class="btn btn-block btn-success btn-sm">
+                        <i class="fa fa-fw fa-plus-circle"></i> Incluir Livro
                     </a>
                 </div>
             </div>
@@ -24,21 +24,21 @@ Perfis
                 <table class="table table-striped table-bordered table-hover" id="tabela-dados">
                     <thead>
                         <tr>
-                            <th>Nome</th>
+                            <th>Título</th>
                             <th class="width70"></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($datas as $data)
                         <tr>
-                            <td>{{$data->nome}}</td>
+                            <td>{{$data->titulo}}</td>
                             <td>
-                                <a href="{{route('editar_role', ['id' => $data->id])}}" class="btn-acao-tabela tooltipsC" title="Editar este registro">
+                                <a href="{{route('editar_livro', ['id' => $data->id])}}" class="btn-accion-tabla tooltipsC" title="Editar este registro">
                                     <i class="fa fa-fw fa-pencil"></i>
                                 </a>
-                                <form action="{{route('excluir_role', ['id' => $data->id])}}" class="d-inline form-excluir" method="POST">
+                                <form action="{{route('excluir_livro', ['id' => $data->id])}}" class="d-inline form-excluir" method="POST">
                                     @csrf @method("delete")
-                                    <button type="submit" class="btn-acao-tabela excluir tooltipsC" title="Excluir este registro">
+                                    <button type="submit" class="btn-accion-tabla excluir tooltipsC" title="Excluir este registro">
                                         <i class="fa fa-fw fa-trash text-danger"></i>
                                     </button>
                                 </form>
@@ -52,4 +52,4 @@ Perfis
         </div>
     </div>
 </div>
-@endsection 
+@endsection
