@@ -20,7 +20,7 @@ if (!function_exists('canUser')) {
             return true;
         } else {
             $roleId = session()->get('role_id');
-            $permissoes = cache()->tags('Permissao')->rememberForever("Permissao.roleid.$roleId", function () {
+            $permissoes = cache()->tags('permissao')->rememberForever("permissao.roleid.$roleId", function () {
                 return Permissao::whereHas('roles', function ($query) {
                     $query->where('role_id', session()->get('role_id'));
                 })->get()->pluck('filtro')->toArray();

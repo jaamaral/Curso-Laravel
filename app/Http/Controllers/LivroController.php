@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Livro;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 
 class LivroController extends Controller
 {
