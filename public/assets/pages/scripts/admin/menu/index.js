@@ -13,5 +13,22 @@ $(document).ready(function () {
             }
         });
     });
+    $('.excluir-menu').on('click', function(event){
+        event.preventDefault();
+        const url = $(this).attr('href');
+        swal({
+            title: 'Deseja realmente excluir o registro?',
+            text: "Esta ação não poderá ser desfeita!",
+            icon: 'warning',
+            buttons: {
+                cancel: "Cancelar",
+                confirm: "Aceitar"
+            },
+        }).then((value) => {
+            if (value) {
+                window.location.href = url;
+            }
+        });
+    })
     $('#nestable').nestable('expandAll');/*expandAll collapseAll*/
 }); 

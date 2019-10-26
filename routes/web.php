@@ -18,12 +18,20 @@ Route::get('seguranca/logout', 'Seguranca\LoginController@logout')->name('logout
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth','superadmin']], function(){
     Route::get('', 'AdminController@index');
+    /*ROTAS DE PERMISSÃO*/
     Route::get('permissao', 'PermissaoController@index')->name('permissao');
     Route::get('permissao/criar', 'PermissaoController@criar')->name('criar_permissao');
+    Route::post('permissao', 'PermissaoController@salvar')->name('salvar_permissao');
+    Route::get('permissao/{id}/editar', 'PermissaoController@editar')->name('editar_permissao');
+    Route::put('permissao/{id}', 'PermissaoController@atualizar')->name('atualizar_permissao');
+    Route::delete('permissao/{id}', 'PermissaoController@excluir')->name('excluir_permissao');
     /*ROTAS DE MENU*/
     Route::get('menu', 'MenuController@index')->name('menu');
     Route::get('menu/criar', 'MenuController@criar')->name('criar_menu');
     Route::post('menu', 'MenuController@salvar')->name('salvar_menu');
+    Route::get('menu/{id}/editar', 'MenuController@editar')->name('editar_menu');
+    Route::put('menu/{id}', 'MenuController@atualizar')->name('atualizar_menu');
+    Route::get('menu/{id}/excluir', 'MenuController@excluir')->name('excluir_menu');
     Route::post('menu/salvar-ordem', 'MenuController@salvarOrdem')->name('salvar_ordem');
     /*ROTAS DE ROLE*/
     Route::get('role', 'RoleController@index')->name('role');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Permissao;
 use Illuminate\Http\Request;
+use App\Http\Requests\ValidarPermissao;
 
 class PermissaoController extends Controller
 {
@@ -35,9 +36,10 @@ class PermissaoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function salvar(Request $request)
+    public function salvar(ValidarPermissao $request)
     {
-        //
+        Permissao::create($request->all());
+        return redirect('admin/permissao/criar')->with('mensagem', 'Permissão criada com sucesso');
     }
 
     /**
@@ -59,7 +61,8 @@ class PermissaoController extends Controller
      */
     public function editar($id)
     {
-        //
+        $data = Permissao::findOrFail($id);
+        return view('admin.permissao.editar', compact('data'));
     }
 
     /**
@@ -69,9 +72,10 @@ class PermissaoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function atualizar(Request $request, $id)
+    public function atualizar(ValidarPermissao $request, $id)
     {
-        //
+        Permissao::findOrFail($id)->update($request->all());
+        return redirect('admin/permissao')->with('mensagem', 'Permissão atualizada com sucesso');
     }
 
     /**
@@ -80,8 +84,16 @@ class PermissaoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function excluir($id)
+    public function excluir(Request $request, $id)
     {
-        //
+        if ($request->ajax()) {
+            if (Permissao::destroy($id)) {
+                return response()->json(['mensagem' => 'ok']);
+            } else {
+                return response()->json(['mensagem' => 'ng']);
+            }
+        } else {
+            abort(404);
+        }
     }
 }

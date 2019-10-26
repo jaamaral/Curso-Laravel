@@ -1,2 +1,1 @@
-<button type="reset" class="btn btn-default">Cancelar</button>
-<button type="submit" class="btn btn-success">Alterar</button> 
+<button type="submit" class="btn btn-success">Atualizar</button>

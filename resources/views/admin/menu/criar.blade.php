@@ -14,7 +14,8 @@
             @include('includes.mensagem')
             <div class="box box-danger">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Criar Menus</h3>
+                  <h3 class="box-title">Incluir Menu</h3>
+                  <a href="{{route('menu')}}" class="btn btn-info btn-sm pull-right">Lista</a>
                 </div>
                 <form action="{{route('salvar_menu')}}" id="form-geral" class="form-horizontal" method="POST" autocomplete="off">
                     @csrf

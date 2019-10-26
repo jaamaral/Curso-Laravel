@@ -22,6 +22,7 @@ Menu
         <div class="box box-success">
             <div class="box-header with-border">
                 <h3 class="box-title">Menus</h3>
+                <a href="{{route('criar_menu')}}" class="btn btn-success btn-sm pull-right">Incluir menu</a>
             </div>
             <div class="box-body">
                 @csrf
