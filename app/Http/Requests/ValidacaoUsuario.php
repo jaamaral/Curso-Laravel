@@ -30,7 +30,7 @@ class ValidacaoUsuario extends FormRequest
                 'email' => 'required|email|max:100|unique:usuario,email,' . $this->route('id'),
                 'password' => 'nullable|min:5',
                 're_password' => 'nullable|required_with:password|min:5|same:password',
-                'role_id' => 'required|integer'
+                'role_id' => 'required|array'
             ];
         } else {
             return [
@@ -39,7 +39,7 @@ class ValidacaoUsuario extends FormRequest
                 'email' => 'required|email|max:100|unique:usuario,email,' . $this->route('id'),
                 'password' => 'required|min:5',
                 're_password' => 'required|min:5|same:password',
-                'role_id' => 'required|integer'
+                'role_id' => 'required|array'
             ];
         }
     }

@@ -16,7 +16,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $datas = Usuario::orderBy('id')->get();
+        $datas = Usuario::with('roles:id,nome')->orderBy('id')->get();
         return view('admin.usuario.index', compact('datas'));
     }
 
@@ -40,7 +40,7 @@ class UsuarioController extends Controller
     public function salvar(Request $request)
     {
         $usuario = Usuario::create($request->all());
-        $usuario->roles()->attach($request->role_id);
+        $usuario->roles()->sync($request->role_id);
         return redirect('admin/usuario')->with('mensagem', 'Usuário criado com sucesso');
     }
 
@@ -66,7 +66,9 @@ class UsuarioController extends Controller
      */
     public function atualizar(Request $request, $id)
     {
-        Usuario::findOrFail($id)->update(array_filter($request->all()));
+        $usuario = Usuario::findOrFail($id);
+        $usuario->update(array_filter($request->all()));
+        $usuario->roles()->sync($request->role_id);
         return redirect('admin/usuario')->with('mensagem', 'Usuário atualizado com sucesso');
     }
 
@@ -76,8 +78,15 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function excluir($id)
+    public function excluir(Request $request, $id)
     {
-        //
+        if ($request->ajax()) {
+            $usuario = Usuario::findOrFail($id);
+            $usuario->roles()->detach();
+            $usuario->delete();
+            return response()->json(['mensagem' => 'ok']);
+         } else {
+            abort(404);
+        }
     }
 }

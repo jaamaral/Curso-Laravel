@@ -31,10 +31,15 @@
 <div class="form-group">
     <label for="role_id" class="col-lg-3 control-label requerido">Função</label>
     <div class="col-lg-8">
-        <select name="role_id" id="role_id" class="form-control" required>
+        <select name="role_id[]" id="role_id" class="form-control" multiple required>
             <option value="">Selecione a Função</option>
             @foreach($roles as $id => $nome)
-                <option value="{{$id}}" {{old("role_id", $data->roles[0]->id ?? "") == $id ? "selected" : ""}}>{{$nome}}</option>
+                <option
+                value="{{$id}}"
+                {{is_array(old('role_id')) ? (in_array($id, old('role_id')) ? 'selected' : '')  : (isset($data) ? ($data->roles->firstWhere('id', $id) ? 'selected' : '') : '')}}
+                >
+                {{$nome}}
+                </option>
             @endforeach
         </select>
     </div>
