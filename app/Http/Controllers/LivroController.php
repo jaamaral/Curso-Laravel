@@ -29,6 +29,7 @@ class LivroController extends Controller
     public function criar()
     {
         can('criar-livros');
+        return view('livro.criar');
     }
 
     /**
@@ -39,7 +40,8 @@ class LivroController extends Controller
      */
     public function salvar(Request $request)
     {
-        //
+        if ($foto = Livro::setFoto($request->foto_up))
+            $request->request->add(['foto' => $foto]);
     }
 
     /**
