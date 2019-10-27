@@ -58,6 +58,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 Route::get('livro', 'LivroController@index')->name('livro');
 Route::get('livro/criar', 'LivroController@criar')->name('criar_livro');
 Route::post('livro', 'LivroController@salvar')->name('salvar_livro');
+Route::post('livro/{livro}', 'LivroController@mostrar')->name('mostrar_livro');
 Route::get('livro/{id}/editar', 'LivroController@editar')->name('editar_livro');
 Route::put('livro/{id}', 'LivroController@atualizar')->name('atualizar_livro');
 Route::delete('livro/{id}', 'LivroController@excluir')->name('excluir_livro');

@@ -42,6 +42,8 @@ class LivroController extends Controller
     {
         if ($foto = Livro::setFoto($request->foto_up))
             $request->request->add(['foto' => $foto]);
+        Livro::create($request->all());
+        return redirect()->route('livro')->with('mensagem', 'Livro criado com sucesso');
     }
 
     /**
@@ -50,9 +52,9 @@ class LivroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function mostrar($id)
+    public function mostrar(Livro $livro)
     {
-        //
+        return view('livro.mostrar', compact('livro'));
     }
 
     /**
