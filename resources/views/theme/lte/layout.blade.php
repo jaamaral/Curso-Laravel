@@ -52,6 +52,29 @@
             <!-- Inicio Footer -->
             @include("theme/$theme/footer")
             <!-- Fim Footer -->
+            <!--Inicio de ventana modal para login con más de un rol -->
+            @if(session()->get("roles") && count(session()->get("roles")) > 1)
+            @csrf
+            <div class="modal fade" id="modal-selecionar-role" data-role-set="{{empty(session()->get("role_id")) ? 'NO' : 'SI'}}" tabindex="-1" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Funções de Usuário</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Você tem mais de uma função na plataforma. Selecione com qual deseja trabalhar</p>
+                            @foreach(session()->get("roles") as $key => $role)
+                                <li>
+                                    <a href="#" class="atribuir-role" data-roleid="{{$role['id']}}" data-rolenome="{{$role["nome"]}}">
+                                        {{$role["nome"]}}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
         </div>
         <script src="{{asset("assets/$theme/bower_components/jquery/dist/jquery.min.js")}}"></script>
         <!-- Bootstrap 3.3.7 -->

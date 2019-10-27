@@ -15,6 +15,7 @@ Route::get('/', 'InicioController@index')->name('inicio');
 Route::get('seguranca/login', 'Seguranca\LoginController@index')->name('login');
 Route::post('seguranca/login', 'Seguranca\LoginController@login')->name('login_post');
 Route::get('seguranca/logout', 'Seguranca\LoginController@logout')->name('logout');
+Route::post('ajax-sesion', 'AjaxController@setSession')->name('ajax')->middleware('auth');
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth','superadmin']], function(){
     Route::get('', 'AdminController@index');

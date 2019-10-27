@@ -20,15 +20,20 @@ class Usuario extends Authenticatable
 
     public function setSession($roles)
     {
+        Session::put([
+            'usuario' => $this->usuario,
+            'usuario_id' => $this->id,
+            'nome_usuario' => $this->nome
+        ]);
         if (count($roles) == 1){
             Session::put([
                 'role_id' => $roles[0]['id'],
                 'role_nome' => $roles[0]['nome'],
-                'usuario' => $this->usuario,
-                'usuario_id' => $this->id,
-                'nome_usuario' => $this->nome
             ]);
         } 
+        else {
+            Session::put('roles', $roles);
+        }
     }
     
     public function setPasswordAttribute($pass)
