@@ -66,7 +66,7 @@ class UsuarioController extends Controller
      */
     public function atualizar(Request $request, $id)
     {
-        Usuario::findOrFail($id)->update($request->all());
+        Usuario::findOrFail($id)->update(array_filter($request->all()));
         return redirect('admin/usuario')->with('mensagem', 'Usuário atualizado com sucesso');
     }
 
