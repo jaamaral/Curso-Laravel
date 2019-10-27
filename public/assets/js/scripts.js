@@ -34,6 +34,11 @@ $(document).ready(function () {
         ajaxRequest(data, '/ajax-sesion', 'atribuir-role');
     });
 
+    $('.mudar-role').on('click', function (event) {
+        event.preventDefault();
+        modal.modal('show');
+    });
+
     function ajaxRequest(data, url, funcion) {
         $.ajax({
             url: url,

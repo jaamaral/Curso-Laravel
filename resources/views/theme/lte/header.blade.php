@@ -116,15 +116,11 @@
                 <!-- Menu Body -->
                 <li class="user-body">
                 <div class="row">
-                    <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
+                    @if(session()->get("roles") && count(session()->get("roles")) > 1)
+                    <div class="col-xs-6 text-center">
+                        <a href="#" class="mudar-role">Mudar Função</a>
                     </div>
-                    <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                    </div>
+                    @endif
                 </div>
                 </li>
                 <!-- Menu Footer-->
