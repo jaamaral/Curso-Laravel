@@ -1,9 +1,9 @@
 $(document).ready(function () {
-    Biblioteca.validacaoGeral('form-geral');
+    Myapp.validacaoGeral('form-geral');
     $('#foto').fileinput({
         language: 'pt-BR',
         allowedFileExtensions: ['jpg', 'jpeg', 'png'],
-        maxFileSize: 1000,
+        maxFileSize: 5000,
         showUpload: false,
         showClose: false,
         initialPreviewAsData: true,

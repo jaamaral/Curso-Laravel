@@ -25,9 +25,9 @@ $(document).ready(function () {
             success: function (respuest) {
                 if (respuest.mensagem == "ok") {
                     form.parents('tr').remove();
-                    Biblioteca.notificacoes('O registro foi excluído com sucesso', 'Biblioteca', 'success');
+                    Myapp.notificacoes('O registro foi excluído com sucesso', 'Myapp', 'success');
                 } else {
-                    Biblioteca.notificacoes('O registro não pode ser excluído, há recursos sendo utilizados', 'Biblioteca', 'error');
+                    Myapp.notificacoes('O registro não pode ser excluído, há recursos sendo utilizados', 'Myapp', 'error');
                 }
 
             },

@@ -17,7 +17,7 @@
                 <h3 class="box-title">Editar Menu</h3>
                 <a href="{{route('menu')}}" class="btn btn-info btn-sm pull-right">Lista</a>
             </div>
-            <form action="{{route('atualizar_menu', ['id' => $data->id])}}" id="form-general" class="form-horizontal" method="POST" autocomplete="off">
+            <form action="{{route('atualizar_menu', ['id' => $data->id])}}" id="form-geral" class="form-horizontal" method="POST" autocomplete="off">
                 @csrf @method("put")
                 <div class="box-body">
                     @include('admin.menu.form')

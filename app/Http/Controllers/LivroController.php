@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ValidacaoLivro;
 use Illuminate\Http\Request;
 use App\Models\Livro;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+
 
 class LivroController extends Controller
 {
@@ -38,7 +41,7 @@ class LivroController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function salvar(Request $request)
+    public function salvar(ValidacaoLivro $request)
     {
         if ($foto = Livro::setFoto($request->foto_up))
             $request->request->add(['foto' => $foto]);
@@ -52,9 +55,13 @@ class LivroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function mostrar(Livro $livro)
+    public function mostrar(Request $request, Livro $livro)
     {
-        return view('livro.mostrar', compact('livro'));
+        if ($request->ajax()) {
+            return view('livro.mostrar', compact('livro'));
+        } else {
+            abort(404);
+        }
     }
 
     /**
@@ -65,7 +72,9 @@ class LivroController extends Controller
      */
     public function editar($id)
     {
-        //
+        
+        $data = Livro::findOrFail($id);
+        return view('livro.editar', compact('data'));
     }
 
     /**
@@ -75,9 +84,13 @@ class LivroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function atualizar(Request $request, $id)
+    public function atualizar(ValidacaoLivro $request, $id)
     {
-        //
+        $livro = Livro::findOrFail($id);
+        if ($foto = Livro::setFoto($request->foto_up, $livro->foto))
+            $request->request->add(['foto' => $foto]);
+        $livro->update($request->all());
+        return redirect()->route('livro')->with('mensagem', 'O livro foi atualizado');
     }
 
     /**
@@ -86,8 +99,18 @@ class LivroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function excluir($id)
+    public function excluir(Request $request, $id)
     {
-        //
+        if ($request->ajax()) {
+            $livro = Livro::findOrFail($id);
+            if (Livro::destroy($id)) {
+                Storage::disk('public')->delete("imagens/fotos/$livro->foto");
+                return response()->json(['mensagem' => 'ok']);
+            } else {
+                return response()->json(['mensagem' => 'ng']);
+            }
+        } else {
+            abort(404);
+        }
     }
 }

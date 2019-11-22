@@ -10,7 +10,7 @@ $(document).ready(function () {
             equalTo: 'As senhas não conferem'
         }
     };
-    Biblioteca.validacaoGeral('form-geral', regras, mensagens);
+    Myapp.validacaoGeral('form-geral', regras, mensagens);
 
     $('#password').on('change', function(){
         const valor = $(this).val();

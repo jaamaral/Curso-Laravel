@@ -1,4 +1,4 @@
-var Biblioteca = function () {
+var Myapp = function () {
     return {
         validacaoGeral: function (id, regras, mensagens) {
             const formulario = $('#' + id);

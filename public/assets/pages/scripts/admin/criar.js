@@ -1,3 +1,3 @@
 $(document).ready(function(){
-    Biblioteca.validacaoGeral('form-geral');
+    Myapp.validacaoGeral('form-geral');
 });

@@ -8,19 +8,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema biblioteca
+-- Schema Myapp
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema biblioteca
+-- Schema Myapp
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `biblioteca` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish2_ci ;
-USE `biblioteca` ;
+CREATE SCHEMA IF NOT EXISTS `Myapp` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish2_ci ;
+USE `Myapp` ;
 
 -- -----------------------------------------------------
--- Table `biblioteca`.`usuario`
+-- Table `Myapp`.`usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `biblioteca`.`usuario` (
+CREATE TABLE IF NOT EXISTS `Myapp`.`usuario` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `usuario` VARCHAR(50) NOT NULL,
   `password` VARCHAR(100) NOT NULL,
@@ -31,9 +31,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `biblioteca`.`rol`
+-- Table `Myapp`.`rol`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `biblioteca`.`rol` (
+CREATE TABLE IF NOT EXISTS `Myapp`.`rol` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`id`))
@@ -41,9 +41,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `biblioteca`.`usuario_rol`
+-- Table `Myapp`.`usuario_rol`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `biblioteca`.`usuario_rol` (
+CREATE TABLE IF NOT EXISTS `Myapp`.`usuario_rol` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `rol_id` INT UNSIGNED NOT NULL,
   `usuario_id` INT UNSIGNED NOT NULL,
@@ -53,21 +53,21 @@ CREATE TABLE IF NOT EXISTS `biblioteca`.`usuario_rol` (
   INDEX `fk_usuario_rol_usuario1_idx` (`usuario_id` ASC) VISIBLE,
   CONSTRAINT `fk_usuario_rol_rol`
     FOREIGN KEY (`rol_id`)
-    REFERENCES `biblioteca`.`rol` (`id`)
+    REFERENCES `Myapp`.`rol` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_usuario_rol_usuario1`
     FOREIGN KEY (`usuario_id`)
-    REFERENCES `biblioteca`.`usuario` (`id`)
+    REFERENCES `Myapp`.`usuario` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `biblioteca`.`permiso`
+-- Table `Myapp`.`permiso`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `biblioteca`.`permiso` (
+CREATE TABLE IF NOT EXISTS `Myapp`.`permiso` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(50) NOT NULL,
   `slug` VARCHAR(50) NOT NULL,
@@ -78,9 +78,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `biblioteca`.`permiso_rol`
+-- Table `Myapp`.`permiso_rol`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `biblioteca`.`permiso_rol` (
+CREATE TABLE IF NOT EXISTS `Myapp`.`permiso_rol` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `rol_id` INT UNSIGNED NOT NULL,
   `permiso_id` INT UNSIGNED NOT NULL,
@@ -89,21 +89,21 @@ CREATE TABLE IF NOT EXISTS `biblioteca`.`permiso_rol` (
   INDEX `fk_permiso_rol_permiso1_idx` (`permiso_id` ASC) VISIBLE,
   CONSTRAINT `fk_permiso_rol_rol1`
     FOREIGN KEY (`rol_id`)
-    REFERENCES `biblioteca`.`rol` (`id`)
+    REFERENCES `Myapp`.`rol` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_permiso_rol_permiso1`
     FOREIGN KEY (`permiso_id`)
-    REFERENCES `biblioteca`.`permiso` (`id`)
+    REFERENCES `Myapp`.`permiso` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `biblioteca`.`libro`
+-- Table `Myapp`.`libro`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `biblioteca`.`libro` (
+CREATE TABLE IF NOT EXISTS `Myapp`.`libro` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `titulo` VARCHAR(100) NOT NULL,
   `isbn` VARCHAR(30) NOT NULL,
@@ -117,9 +117,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `biblioteca`.`libro_prestamo`
+-- Table `Myapp`.`libro_prestamo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `biblioteca`.`libro_prestamo` (
+CREATE TABLE IF NOT EXISTS `Myapp`.`libro_prestamo` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `usuario_id` INT UNSIGNED NOT NULL,
   `libro_id` INT UNSIGNED NOT NULL,
@@ -132,12 +132,12 @@ CREATE TABLE IF NOT EXISTS `biblioteca`.`libro_prestamo` (
   INDEX `fk_libro_prestamo_libro1_idx` (`libro_id` ASC) VISIBLE,
   CONSTRAINT `fk_libro_prestamo_usuario1`
     FOREIGN KEY (`usuario_id`)
-    REFERENCES `biblioteca`.`usuario` (`id`)
+    REFERENCES `Myapp`.`usuario` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_libro_prestamo_libro1`
     FOREIGN KEY (`libro_id`)
-    REFERENCES `biblioteca`.`libro` (`id`)
+    REFERENCES `Myapp`.`libro` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
